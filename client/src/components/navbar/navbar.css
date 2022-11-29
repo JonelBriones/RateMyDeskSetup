@@ -1,0 +1,159 @@
+/* DESKTOP CSS */
+.sign-in-btn {
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+.sign-in-btn:hover {
+  color: var(--primary-color);
+}
+@media (min-width: 32.05rem) {
+  .menu-wrap {
+    display: none;
+  }
+}
+
+/* MOBILE CSS */
+
+:root {
+  /* --primary-color: #fca311; */
+  --overlay-color: rgba(rgba(24, 39, 51, 0.85));
+  --menu-speed: 0.75s;
+}
+
+@media (max-width: 32rem) {
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .p2 {
+    padding: 4rem;
+  }
+  .navbar {
+    display: none;
+  }
+  .menu-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  .menu-wrap .toggler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    opacity: 0;
+  }
+  .menu-wrap .hamburger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 60px;
+    height: 60px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .menu-wrap .hamburger > div {
+    position: relative;
+    flex: none;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+  }
+  .menu-wrap .hamburger > div:before,
+  .menu-wrap .hamburger > div:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    width: 100%;
+    height: 2px;
+    background-color: inherit;
+    transition: background-color 0.4s ease;
+  }
+  .menu-wrap .hamburger > div::after {
+    top: 10px;
+  }
+  .menu-wrap .toggler:checked + .hamburger > div {
+    transform: rotate(135deg);
+    background-color: var(--primary-color);
+  }
+  .menu-wrap .toggler:checked + .hamburger > div:before,
+  .menu-wrap .toggler:checked + .hamburger > div:after {
+    top: 0;
+    transform: rotate(90deg);
+    background-color: var(--primary-color);
+  }
+  .menu-wrap .toggler:checked:hover + .hamburger > div {
+    transform: rotate(225deg);
+  }
+
+  .menu-wrap .toggler:checked ~ .menu {
+    visibility: visible;
+  }
+  .menu-wrap .toggler:checked ~ .menu > div {
+    transform: scale(1);
+    transition: var(--menu-speed);
+  }
+  .menu-wrap .toggler:checked ~ .menu > div > div {
+    opacity: 1;
+    transition: opacity 0.4s ease 0.4s;
+  }
+
+  .menu-wrap .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .menu-wrap .menu > div {
+    background-color: #000;
+    width: 300vw;
+    height: 300vw;
+    display: flex;
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+  }
+  .menu-wrap .menu > div > div {
+    text-align: center;
+    max-width: 90vw;
+    max-height: 100vh;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .menu-wrap .menu > div > div > ul > li {
+    list-style: none;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+  .menu-wrap .menu > div > div > ul > li > a:hover {
+    color: var(--primary-color);
+    transition: color 0.4s ease;
+  }
+  .menu-wrap .menu > div > div > div > ul > li > a:hover {
+    transition: all 200ms ease;
+  }
+}

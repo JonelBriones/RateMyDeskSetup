@@ -1,26 +1,45 @@
 import React from 'react'
 import DeskPost from '../../components/desk-posts/DeskPost'
-
+import Hamburger from '../../components/navbar/Hamburger'
+import './home.css'
 const Home = () => {
   return (
     <div>
-      <div className="search-bar__container">
-        {/* <img
-          src="https://www.minimaldesksetups.com/wp-content/uploads/2020/09/Featureimage.jpg"
-          alt=""
-        /> */}
+      <Hamburger />
+      <div className="search-bar__container p2">
         <div className="search-bar__header">
-          <h1>Clean your mat.</h1>
-          <h1>Hide your wires.</h1>
-          <h1>Share your setup.</h1>
+          <div className="wrapper">
+            <h1>Hide your</h1>
+            <div className="words">
+              <h1>
+                <span>wires</span>
+              </h1>
+              <h1>
+                <span>trash</span>
+              </h1>
+              <h1>
+                <span>wires</span>
+              </h1>
+            </div>
+            <h1>.</h1>
+          </div>
+          <h1>
+            <span>Share your setup</span>.
+          </h1>
         </div>
         <div className="search-bar">
           <input type="text" placeholder="Search by tags" />
         </div>
+        <div className="search-tags">
+          <button>minimal</button>
+          <button>gaming</button>
+          <button>productivity</button>
+          <button>aesthetic</button>
+        </div>
       </div>
 
       {/* What is this site? */}
-      <div className="instructions__container">
+      <div className="instructions__container p2">
         <div className="instructions__info">
           <h1>Explore and rate setups</h1>
           <div className="instructions__section">
@@ -40,10 +59,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="instructions__img">
-          {/* <img src="" alt="" /> */}
-          <h1>img</h1>
-        </div>
+        <img
+          src="https://www.minimaldesksetups.com/wp-content/uploads/2020/09/Featureimage.jpg"
+          alt=""
+        />
       </div>
       <DeskPost />
     </div>
