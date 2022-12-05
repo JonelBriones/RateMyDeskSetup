@@ -3,7 +3,8 @@ import SignIn from '../authentication/SignIn'
 import { Link } from 'react-router-dom'
 const Navbar = () => {
   const [toggleAuth, setToggleAuth] = useState(false)
-  const [loggedUser, setLoggedUser] = useState({})
+  const [loggedUser, setLoggedUser] = useState('')
+
   const [user, setUser] = useState({
     username: '',
     email: '',

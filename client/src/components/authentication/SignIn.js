@@ -1,4 +1,8 @@
 import React from 'react'
+import {
+  signInWithGooglePopup,
+  createUserDocumentFromAuth,
+} from '../../utils/firebase.utils'
 import './signInModal.css'
 import { TiCancel } from 'react-icons/ti'
 const SignIn = ({
@@ -8,6 +12,10 @@ const SignIn = ({
   onSubmitHandler,
   user,
 }) => {
+  const logGoogleUser = async () => {
+    const { user } = await signInWithGooglePopup()
+    const userDocRef = await createUserDocumentFromAuth(user)
+  }
   return (
     <div className="modal__container">
       <div className="sign-in__modal">
@@ -51,6 +59,7 @@ const SignIn = ({
             <button type="submit" className="sign-in btn">
               Sign in
             </button>
+            <button onClick={logGoogleUser}>sign up with google</button>
           </form>
         </div>
       </div>

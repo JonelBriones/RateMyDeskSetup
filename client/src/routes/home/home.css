@@ -10,8 +10,9 @@
 /* BACKGROUND IMAGE SEARCH BAR CONTAINER */
 .search-bar__container:before {
   content: '';
-  background: url('https://www.minimaldesksetups.com/wp-content/uploads/2020/09/Featureimage.jpg')
-    no-repeat center center/cover;
+  background: url('/public/images/pexels-josh-sorenson-10782398.jpg') no-repeat
+    center center / cover;
+
   opacity: 0.8;
   position: absolute;
   top: 0;
