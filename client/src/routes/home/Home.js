@@ -1,11 +1,9 @@
 import React from 'react'
 import DeskPost from '../../components/desk-posts/DeskPost'
-import Hamburger from '../../components/navbar/Hamburger'
 import './home.css'
 const Home = () => {
   return (
-    <div>
-      <Hamburger />
+    <div id="home">
       <div className="search-bar__container p2">
         <div className="search-bar__header">
           <div className="wrapper">

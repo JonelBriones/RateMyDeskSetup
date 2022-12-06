@@ -1,0 +1,43 @@
+.auth__container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+  margin: auto;
+  justify-content: center;
+}
+.auth__container > div {
+  height: inherit;
+  text-align: left;
+  flex-direction: column;
+  display: flex;
+  padding: 2rem;
+  flex: 1;
+  min-width: 32rem;
+  max-width: 600px;
+}
+.sign-in__form input,
+.sign-in.btn {
+  width: 100%;
+  padding: 10px 15px;
+  margin-block: 5px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  outline: none;
+}
+.google {
+  background-color: rgb(66 133 244);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: white;
+}
+.sign-up__container {
+  padding: 2rem;
+  text-align: left;
+}
+
+/* VALIDATION */
+.sign-in__form label {
+  color: red;
+}
