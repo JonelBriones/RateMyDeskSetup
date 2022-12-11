@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
-  const loggedUser = false
+  const currentUser = useSelector((state) => state.user.currentUser)
   return (
     <div className="navbar">
       <Link to="/">
@@ -10,7 +11,7 @@ const Navbar = () => {
           RateMy<span>DeskSetup</span>
         </h1>
       </Link>
-      {loggedUser ? (
+      {currentUser ? (
         <Link to="/dashboard/myPost" className="redirect">
           <h4 className="sign-in-btn">Dashboard</h4>
         </Link>

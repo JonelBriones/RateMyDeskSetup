@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.css'
 const Hamburger = () => {
+  const loggedUser = true
   return (
     <div>
       <div className="menu-wrap">
@@ -19,9 +20,15 @@ const Hamburger = () => {
                 <li>
                   <a href="/explore">Explore</a>
                 </li>
-                <li>
-                  <a href="/auth">Sign In</a>
-                </li>
+                {loggedUser ? (
+                  <li>
+                    <a href="/dashboard/myPost">Dashboard</a>
+                  </li>
+                ) : (
+                  <li>
+                    <a href="/auth">Sign In</a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

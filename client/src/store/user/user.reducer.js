@@ -1,8 +1,6 @@
 // HANDLES CURRENT LOGGED USER
 
-export const USER_ACTION_TYPES = {
-  SET_CURRENT_USER: 'SET_CURRENT_USER',
-}
+import { USER_ACTION_TYPES } from './user.types'
 
 const INITAL_STATE = {
   currentUser: null,

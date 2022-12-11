@@ -4,10 +4,12 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import './dashboard.css'
 import { AiFillEdit } from 'react-icons/ai'
 import { RiAccountCircleFill } from 'react-icons/ri'
+import { CgLogOut } from 'react-icons/cg'
 import Account from '../../components/features/Account'
 import MyPosts from '../../components/features/MyPosts'
-import CreatePost from '../../components/desk-posts/CreatePost'
-import { useSelector } from 'react-redux'
+
+import { signOutUser } from '../../utils/firebase.utils'
+import CreatePost from '../../components/create-post/CreatePost'
 const Dashboard = () => {
   const params = useParams()
   const navigate = useNavigate()
@@ -26,6 +28,7 @@ const Dashboard = () => {
       console.log('returning to home')
     }
   }, [])
+
   return (
     <div>
       <div className="dashboard__container">
@@ -46,6 +49,11 @@ const Dashboard = () => {
             <Link to="/dashboard/account">
               <li onClick={() => setToggleFeature('account')}>
                 <RiAccountCircleFill size={24} /> Account
+              </li>
+            </Link>
+            <Link to="/">
+              <li onClick={signOutUser}>
+                <CgLogOut size={24} /> Log out
               </li>
             </Link>
           </ul>

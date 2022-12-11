@@ -6,7 +6,7 @@
 .sign-in-btn:hover {
   color: var(--primary-color);
 }
-@media (min-width: 48.05rem) {
+@media (min-width: 32.05rem) {
   .menu-wrap {
     display: none;
   }
@@ -20,7 +20,7 @@
   --menu-speed: 0.75s;
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 32rem) {
   a {
     text-decoration: none;
     color: #fff;
