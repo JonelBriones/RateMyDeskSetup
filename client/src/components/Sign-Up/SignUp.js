@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { db, auth } from '../../utils/firebase.utils'
+import './signUp.css'
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from '../../utils/firebase.utils'
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage'
 const defaultUserField = {
+  profileImg: '',
   displayName: '',
   email: '',
   password: '',
-  confirmPassword: '',
 }
 const SignUp = () => {
   const navigate = useNavigate()
@@ -17,23 +22,30 @@ const SignUp = () => {
     email: '',
     password: '',
   })
+  const [profileImage, setProfileImage] = useState('')
   const [user, setUser] = useState(defaultUserField)
-  const { displayName, email, password, confirmPassword } = user
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const storage = getStorage()
+  const { profileImg, displayName, email, password } = user
+
   const onSubmitHandler = async (e) => {
-    console.log('form submit', user)
     e.preventDefault()
-    if (user.password !== user.confirmPassword) {
+    if (user.password !== confirmPassword) {
       setError({
         password: 'passwords do not match!',
       })
       console.log(error)
       return
     }
+    console.log('form submit', user)
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(email, password)
-      console.log(user)
-      await createUserDocumentFromAuth(user, { displayName })
-      navigate('/')
+      const res = await createUserWithEmailAndPassword(auth, email, password)
+      console.log('USER DATA', user)
+
+      await setDoc(doc(db, 'users', res.user.uid), {
+        ...user,
+        timeStamp: serverTimestamp(),
+      })
     } catch (error) {
       console.log('problem with creating user', error)
       if (error.code === 'auth/email-already-in-use') {
@@ -58,10 +70,73 @@ const SignUp = () => {
     newObject[e.target.name] = e.target.value
     setUser(newObject)
   }
+  useEffect(() => {
+    const uploadImage = async () => {
+      const name = new Date().getTime() + profileImage.name
+      console.log('IMAGE NAME', name)
+      const storageRef = ref(storage, name)
+
+      const uploadTask = uploadBytesResumable(storageRef, profileImage)
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          console.log('Upload is ' + progress + '% done')
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused')
+              break
+            case 'running':
+              console.log('Upload is running')
+              break
+            default:
+              break
+          }
+        },
+        (error) => {
+          console.log(error)
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log('File available at', downloadURL)
+            setUser((prev) => ({
+              ...user,
+              profileImg: downloadURL,
+            }))
+          })
+        }
+      )
+    }
+    profileImage && uploadImage()
+  }, [profileImage])
+  const chooseFile = (file) => {
+    setProfileImage(file)
+  }
   return (
     <div>
       <h1>Create an account!</h1>
       <form onSubmit={onSubmitHandler} className="sign-in__form">
+        <div className="profile-pic">
+          <img
+            src={
+              profileImage
+                ? URL.createObjectURL(profileImage)
+                : 'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'
+            }
+            alt="profile-img"
+            className="profile-img"
+          />
+          <div>
+            <input
+              type="file"
+              onChange={(e) => chooseFile(e.target.files[0])}
+              name="file"
+              className="choose-file"
+            />
+          </div>
+        </div>
         <input
           type="text"
           placeholder="Display Name"
@@ -98,7 +173,7 @@ const SignUp = () => {
           placeholder="Confirm Password"
           name="confirmPassword"
           value={confirmPassword}
-          onChange={onChangeHandler}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
         <button type="submit" className="sign-in btn">

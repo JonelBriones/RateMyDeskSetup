@@ -6,13 +6,11 @@ import {
 
 import { FcGoogle } from 'react-icons/fc'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 const defaultUserField = {
   email: '',
   password: '',
 }
 const SignIn = () => {
-  const currentUser = useSelector((state) => state.user.currentUser)
   const navigate = useNavigate()
   const [error, setError] = useState({
     email: '',
@@ -45,11 +43,6 @@ const SignIn = () => {
     newObject[e.target.name] = e.target.value
     setUser(newObject)
   }
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/')
-    }
-  }, [currentUser])
   return (
     <div>
       <h1>Already have an account?</h1>

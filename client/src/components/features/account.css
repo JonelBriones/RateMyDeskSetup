@@ -1,0 +1,21 @@
+/* img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border: 2px solid black;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+} */
+.account ul {
+  margin: auto;
+}
+ul li {
+  list-style-type: none;
+}
+.profile__edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

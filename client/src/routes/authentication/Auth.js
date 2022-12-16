@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react'
 import SignIn from '../../components/Sign-In/SignIn'
 import SignUp from '../../components/Sign-Up/SignUp'
 import './auth.css'
-
-import { getRedirectResult } from 'firebase/auth'
-import { auth, createUserDocumentFromAuth } from '../../utils/firebase.utils'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Auth = () => {
+  const currentUser = useSelector((state) => state.user.currentUser)
+  const navigate = useNavigate()
   useEffect(() => {
-    const result = async () => {
-      const response = await getRedirectResult(auth)
-      if (response) {
-        const userDocRef = await createUserDocumentFromAuth(response.user)
-        console.log(response)
-      }
+    if (currentUser) {
+      navigate('/')
     }
-    result()
-  }, [])
+  }, [currentUser])
   return (
     <div className="auth__container">
       <SignUp />

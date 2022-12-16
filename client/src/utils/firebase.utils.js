@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
+import { getStorage } from 'firebase/storage'
+
 import {
   getAuth,
   signInWithRedirect,
@@ -24,7 +26,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig)
 const analytics = getAnalytics(firebaseApp)
-
 // GOOGLE SIGN IN
 const googleProvider = new GoogleAuthProvider()
 
@@ -38,6 +39,7 @@ export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider)
 
 export const db = getFirestore()
+export const storage = getStorage(firebaseApp)
 
 export const createUserDocumentFromAuth = async (
   userAuth,
